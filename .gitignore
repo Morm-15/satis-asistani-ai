@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Environment Variables (Security)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# OS Generated files
+.DS_Store
+Thumbs.db
+
+# Build outputs
+dist/
+build/
+coverage/
+
+# Expo / React Native specific
+.expo/
+*.jks
+*.keystore
+android/app/debug.keystore
+ios/Pods/

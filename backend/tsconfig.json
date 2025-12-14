@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es2020",                       /* إصدار الجافاسكربت الناتج */
+    "module": "commonjs",                     /* نظام المديولات المتوافق مع Node.js */
+    "lib": ["es2020"],                        /* المكتبات القياسية المتاحة */
+    "outDir": "./dist",                       /* مجلد المخرجات عند البناء */
+    "rootDir": "./src",                       /* مجلد الكود المصدري */
+    "strict": true,                           /* تفعيل الوضع الصارم (مهم جداً للـ CV) */
+    "esModuleInterop": true,                  /* لتوافق المديولات */
+    "skipLibCheck": true,                     /* تسريع الترجمة بتجاهل فحص ملفات التعريفات الخارجية */
+    "forceConsistentCasingInFileNames": true  /* منع مشاكل الأسماء في Windows/Linux */
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

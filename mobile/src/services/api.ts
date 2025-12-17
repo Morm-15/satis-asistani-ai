@@ -1,13 +1,16 @@
 // mobile/src/services/api.ts
 import axios from 'axios';
 
-// الرابط الخاص بـ LocalTunnel
-const BASE_URL = 'https://hot-crabs-hope.loca.lt/api/products';
+// ⚠️ استبدل الرقم أدناه برقم الـ IP الذي ظهر لك في ipconfig
+const YOUR_IP = '192.168.1.108' +
+    '';
+
+// لاحظ أننا نستخدم http وليس https
+const BASE_URL = `http://${YOUR_IP}:3000/api/products`;
 
 export const analyzeImage = async (imageUri: string) => {
     const formData = new FormData();
 
-    // تجهيز الملف
     const filename = imageUri.split('/').pop();
     const match = /\.(\w+)$/.exec(filename || '');
     const type = match ? `image/${match[1]}` : `image`;
@@ -16,21 +19,20 @@ export const analyzeImage = async (imageUri: string) => {
     formData.append('image', { uri: imageUri, name: filename, type });
 
     try {
-        console.log(`📡 Sending image to: ${BASE_URL}/analyze`);
+        console.log(`📡 Connecting to: ${BASE_URL}/analyze`);
 
+        // إزالة أي Headers غريبة، فقط نحتاج Content-Type
         const response = await axios.post(`${BASE_URL}/analyze`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
-                // 👇 هذا هو السطر الأهم لتجاوز شاشة الحماية
-                'bypass-tunnel-reminder': 'true',
             },
-            timeout: 30000, // مهلة 30 ثانية
+            timeout: 10000,
         });
 
         return response.data;
     } catch (error: any) {
-        // طباعة تفاصيل الخطأ بشكل واضح
-        console.error('❌ API Error Details:', error.response ? error.response.data : error.message);
+        console.error('❌ Connection Failed:', error.message);
+        if(error.response) console.error('Server Error:', error.response.data);
         throw error;
     }
 };

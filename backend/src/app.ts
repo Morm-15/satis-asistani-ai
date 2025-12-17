@@ -30,7 +30,9 @@ app.get('/', (req: Request, res: Response) => {
 // --- تشغيل السيرفر ---
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-    console.log(`\n🚀 Server is running on: http://localhost:${PORT}`);
-    console.log(`👉 Test endpoint: http://localhost:${PORT}/api/products/analyze\n`);
+// 🔴 التغيير الجذري هنا: أضفنا '0.0.0.0'
+app.listen(Number(PORT), '0.0.0.0', () => {
+    console.log(`🚀 Server is running!`);
+    console.log(`📡 Local:   http://localhost:${PORT}`);
+    console.log(`📡 Network: http://0.0.0.0:${PORT}`); // الهاتف سيتصل عبر هذا
 });
